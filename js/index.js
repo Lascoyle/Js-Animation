@@ -31,6 +31,9 @@ runBgm.addEventListener('ended', function loop() {
 let attackBgm = new Audio();
 attackBgm.src = '../assets/Sounds/attack2.mp3';
 
+let dashBgm = new Audio();
+dashBgm.src = '../assets/Sounds/dash.mp3';
+
 // WARRIOR MANAGEMENT
 
 // Warrior object settings
@@ -53,7 +56,7 @@ function run() {
     runBgm.volume = 0.8;
 }
 
-function stop() {
+function stopRun() {
     frameY = 0;
     gameSpeed = 0;
     runBgm.pause()
@@ -62,6 +65,9 @@ function stop() {
 function dash () {
     frameY = 11;
     gameSpeed = 6;
+    dashBgm.play()
+    dashBgm.playbackRate = 1.5;
+    dashBgm.volume = 0.8;
 }
 
 function slide () {
@@ -73,6 +79,7 @@ function attack() {
     frameY = 3;
     attackBgm.play();
     attackBgm.playbackRate = 1.5;
+    attackBgm.volume = 0.8;
 }
 
 
@@ -142,7 +149,7 @@ function animate() {
     document.addEventListener('keyup', (event) => {
         const arrowRight = event.key;
         if(arrowRight === "ArrowRight") {
-            stop()
+            stopRun()
         }
     })
 
