@@ -65,6 +65,14 @@ let x = 0;
 let x2 = 1400;
 let gameSpeed = 0;
 
+// BGM MANAGEMENT
+let mainOst = new Audio();
+mainOst.src = '../assets/Sounds/ost.mp3';
+mainOst.addEventListener('ended', function loop() {
+    this.currentTime = 0;
+    this.play();
+}, false)
+
 
 // Animation loop
 function animate() {
@@ -137,6 +145,8 @@ function animate() {
     })
 
     gameFrame++;
+
+    mainOst.play();
     requestAnimationFrame(animate);
 };
 
