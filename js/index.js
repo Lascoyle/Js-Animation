@@ -1,3 +1,5 @@
+import {mainOst, windBgm, runBgm, attackBgm, dashBgm, slideBgm} from './sounds.js'
+
 /** @type {HTMLCanvasElement} */
 
 const canvas =  document.getElementById('canvas1');
@@ -6,50 +8,24 @@ const ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width = 1400;
 const CANVAS_HEIGHT = canvas.height = 600;
 
-// BGM MANAGEMENT
-let mainOst = new Audio();
-mainOst.src = '../assets/Sounds/ost.mp3';
-mainOst.addEventListener('ended', function loop() {
-    this.currentTime = 0;
-    this.play();
-}, false)
 
-let windBgm = new Audio();
-windBgm.src = '../assets/Sounds/wind.mp3';
-windBgm.addEventListener('ended', function loop() {
-    this.currentTime = 0;
-    this.play();
-}, false)
-
-let runBgm = new Audio();
-runBgm.src = '../assets/Sounds/run.mp3';
-runBgm.addEventListener('ended', function loop() {
-    this.currentTime = 0;
-    this.play();
-}, false)
-
-let attackBgm = new Audio();
-attackBgm.src = '../assets/Sounds/attack2.mp3';
-
-let dashBgm = new Audio();
-dashBgm.src = '../assets/Sounds/dash.mp3';
 
 // WARRIOR MANAGEMENT
 
 // Warrior object settings
 const warriorImage = new Image();
 warriorImage.src = "./assets/Warrior/SpriteSheet/Warrior_Sheet-Effect.png";
-const spriteWidth = 69;
-const spriteHeight = 44;
-let frameX = 0;
-let frameY = 0;
+const warriorSpriteWidth = 69;
+const warriorSpriteHeight = 44;
+let warriorFrameX = 0;
+let warriorFrameY = 0;
 let gameFrame = 0;
 const staggerFrames = 7;
 
 
 // Warrior Animation functions
 function run() {
-    frameY = 1;
+    warriorFrameY = 1;
     gameSpeed = 3;
     runBgm.play()
     runBgm.playbackRate = 1.5;
@@ -57,26 +33,27 @@ function run() {
 }
 
 function stopRun() {
-    frameY = 0;
+    warriorFrameY = 0;
     gameSpeed = 0;
     runBgm.pause()
 }
 
 function dash () {
-    frameY = 11;
-    gameSpeed = 6;
+    warriorFrameY = 11;
+    gameSpeed = 8;
     dashBgm.play()
     dashBgm.playbackRate = 1.5;
-    dashBgm.volume = 0.8;
 }
 
 function slide () {
-    frameY = 14;
+    warriorFrameY = 14;
     gameSpeed = 6;
+    slideBgm.play()
+    slideBgm.playbackRate = 1.5;
 }
 
 function attack() {
-    frameY = 3;
+    warriorFrameY = 3;
     attackBgm.play();
     attackBgm.playbackRate = 1.5;
     attackBgm.volume = 0.8;
@@ -136,8 +113,8 @@ function animate() {
         }
 
     let position = Math.floor(gameFrame / staggerFrames) % 5;
-    frameX = spriteWidth * position;
-    ctx.drawImage(warriorImage, frameX, frameY * spriteHeight, spriteWidth, spriteHeight, 200, 430, spriteWidth * 2.5, spriteHeight * 2.5);
+    warriorFrameX = warriorSpriteWidth * position;
+    ctx.drawImage(warriorImage, warriorFrameX, warriorFrameY * warriorSpriteHeight, warriorSpriteWidth, warriorSpriteHeight, 200, 430, warriorSpriteWidth * 2.5, warriorSpriteHeight * 2.5);
 
     document.addEventListener('keydown', (event) => {
         const arrowRight = event.key;
