@@ -1,4 +1,5 @@
 import {mainOst, windBgm, runBgm, attackBgm, dashBgm, slideBgm} from './sounds.js'
+import {backgroundLayer1, backgroundLayer2, backgroundLayer3, backgroundLayer4, backgroundLayer5, backgroundLayer6} from './backgrounds.js'
 
 /** @type {HTMLCanvasElement} */
 
@@ -21,9 +22,10 @@ let warriorFrameX = 0;
 let warriorFrameY = 0;
 let gameFrame = 0;
 const staggerFrames = 7;
+let gameSpeed = 0;
 
 
-// Warrior Animation functions
+// WARRIOR ACTIONS
 function run() {
     warriorFrameY = 1;
     gameSpeed = 3;
@@ -60,25 +62,8 @@ function attack() {
 }
 
 
-// BACKGROUND MANAGEMENT
-
-// Background objetc settings
-const backgroundLayer1 = new Image();
-backgroundLayer1.src = './assets/Background/sky.png'
-const backgroundLayer2 = new Image();
-backgroundLayer2.src = './assets/Background/glacial_mountains.png'
-const backgroundLayer3 = new Image();
-backgroundLayer3.src = './assets/Background/clouds_mg_1.png'
-const backgroundLayer4 = new Image();
-backgroundLayer4.src = './assets/Background/clouds_mg_2.png'
-const backgroundLayer5 = new Image();
-backgroundLayer5.src = './assets/Background/clouds_mg_3.png'
-const backgroundLayer6 = new Image();
-backgroundLayer6.src = './assets/Background/clouds_bg.png'
-
 let x = 0;
 let x2 = 1400;
-let gameSpeed = 0;
 
 
 // Animation loop
