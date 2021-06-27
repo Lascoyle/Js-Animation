@@ -1,4 +1,5 @@
 // BGM MANAGEMENT
+
 let mainOst = new Audio();
 mainOst.src = '../assets/sounds/ost.mp3';
 mainOst.addEventListener('ended', function loop() {

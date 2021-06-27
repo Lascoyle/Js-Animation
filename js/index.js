@@ -1,3 +1,4 @@
+import { warriorImage, warriorSpriteWidth, warriorSpriteHeight} from './warrior.js';
 import {mainOst, windBgm, runBgm, attackBgm, dashBgm, slideBgm} from './sounds.js'
 import {backgroundLayer1, backgroundLayer2, backgroundLayer3, backgroundLayer4, backgroundLayer5, backgroundLayer6} from './backgrounds.js'
 
@@ -5,21 +6,11 @@ import {backgroundLayer1, backgroundLayer2, backgroundLayer3, backgroundLayer4, 
 
 const canvas =  document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-
 const CANVAS_WIDTH = canvas.width = 1400;
 const CANVAS_HEIGHT = canvas.height = 600;
 
-
-
-// WARRIOR MANAGEMENT
-
-// Warrior object settings
-const warriorImage = new Image();
-warriorImage.src = "./assets/Warrior/SpriteSheet/Warrior_Sheet-Effect.png";
-const warriorSpriteWidth = 69;
-const warriorSpriteHeight = 44;
-let warriorFrameX = 0;
-let warriorFrameY = 0;
+let frameX = 0;
+let frameY = 0;
 let gameFrame = 0;
 const staggerFrames = 7;
 let gameSpeed = 0;
@@ -27,7 +18,7 @@ let gameSpeed = 0;
 
 // WARRIOR ACTIONS
 function run() {
-    warriorFrameY = 1;
+    frameY = 1;
     gameSpeed = 3;
     runBgm.play()
     runBgm.playbackRate = 1.5;
@@ -35,27 +26,27 @@ function run() {
 }
 
 function stopRun() {
-    warriorFrameY = 0;
+    frameY = 0;
     gameSpeed = 0;
     runBgm.pause()
 }
 
 function dash () {
-    warriorFrameY = 11;
+    frameY = 11;
     gameSpeed = 8;
     dashBgm.play()
     dashBgm.playbackRate = 1.5;
 }
 
 function slide () {
-    warriorFrameY = 14;
+    frameY = 14;
     gameSpeed = 6;
     slideBgm.play()
     slideBgm.playbackRate = 1.5;
 }
 
 function attack() {
-    warriorFrameY = 3;
+    frameY = 3;
     attackBgm.play();
     attackBgm.playbackRate = 1.5;
     attackBgm.volume = 0.8;
@@ -98,8 +89,8 @@ function animate() {
         }
 
     let position = Math.floor(gameFrame / staggerFrames) % 5;
-    warriorFrameX = warriorSpriteWidth * position;
-    ctx.drawImage(warriorImage, warriorFrameX, warriorFrameY * warriorSpriteHeight, warriorSpriteWidth, warriorSpriteHeight, 200, 430, warriorSpriteWidth * 2.5, warriorSpriteHeight * 2.5);
+    frameX = warriorSpriteWidth * position;
+    ctx.drawImage(warriorImage, frameX, frameY * warriorSpriteHeight, warriorSpriteWidth, warriorSpriteHeight, 200, 430, warriorSpriteWidth * 2.5, warriorSpriteHeight * 2.5);
 
     document.addEventListener('keydown', (event) => {
         const arrowRight = event.key;
@@ -141,6 +132,7 @@ function animate() {
     mainOst.play();
     windBgm.play();
     windBgm.volume = 0.5;
+
     requestAnimationFrame(animate);
 };
 
